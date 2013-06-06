@@ -37,7 +37,7 @@ module Seahorse
         @actions ||= {}
         @operations ||= {}
         @operations[name] = Operation.new(self, name, action, &block)
-        @operations[name].documentation = @desc
+        @operations[name].documentation = @desc unless @operations[name].documentation
         @actions[action] = @operations[name]
         @desc = nil
       end

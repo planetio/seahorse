@@ -40,6 +40,10 @@ module Seahorse
       url ? (@url = url) : @url
     end
 
+    def desc(desc = nil)
+      desc ? (@documentation = desc) : @documentation
+    end
+
     def input(type = nil, &block)
       @input ||= ShapeBuilder.type_class_for(type || 'structure').new
       type || block ? ShapeBuilder.new(@input).build(&block) : @input

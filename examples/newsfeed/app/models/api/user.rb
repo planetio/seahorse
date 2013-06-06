@@ -13,6 +13,7 @@ class Api::User
     timestamp :created_at
   end
 
+  desc 'Creates a new user'
   operation :create do
     url '/:username'
 
@@ -24,6 +25,7 @@ class Api::User
   end
 
   operation :follow do
+    desc 'Follows another user'
     url '/:username/follow/:following_username'
     verb :post
 
@@ -38,11 +40,13 @@ class Api::User
     end
   end
 
+  desc 'List all users'
   operation :index do
     output(:list) { username as: [:user, :username] }
   end
 
   operation :show do
+    desc 'Display a user'
     url '/:username'
     input { string :username, uri: true, required: true }
     output :user
