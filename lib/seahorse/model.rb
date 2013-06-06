@@ -5,9 +5,12 @@ module Seahorse
     class << self
       def apis; @@apis end
 
-      def add_all_routes(router)
+      # @param router
+      # @param options [Hash] opts options for drawing routes
+      # @option options [Boolean] :exclude_rpc_routes Do not add routes for RPC calls
+      def add_all_routes(router, options = {})
         Dir.glob("#{Rails.root}/app/models/api/*.rb").each {|f| load f }
-        @@apis.values.each {|api| api.add_routes(router) }
+        @@apis.values.each {|api| api.add_routes(router, options) }
       end
     end
 
@@ -24,8 +27,8 @@ module Seahorse
         name.underscore.gsub(/_api$|^api\//, '')
       end
 
-      def add_routes(router)
-        Seahorse::Router.new(self).add_routes(router)
+      def add_routes(router, options = {})
+        Seahorse::Router.new(self, options).add_routes(router)
       end
 
       def desc(text)
