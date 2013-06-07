@@ -31,8 +31,8 @@ class Api::Post
     integer :post_id, uri: true, required: true, as: :id
   end
 
-  desc "Creates a new post"
   operation :create do
+    desc "Creates a new post"
     url '/:username/posts'
 
     input do

@@ -13,8 +13,8 @@ class Api::User
     timestamp :created_at
   end
 
-  desc 'Creates a new user'
   operation :create do
+    desc 'Creates a new user'
     url '/:username'
 
     input do
@@ -40,8 +40,8 @@ class Api::User
     end
   end
 
-  desc 'List all users'
   operation :index do
+    desc 'List all users'
     output(:list) { username as: [:user, :username] }
   end
 

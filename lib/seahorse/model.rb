@@ -28,18 +28,12 @@ module Seahorse
         Seahorse::Router.new(self).add_routes(router)
       end
 
-      def desc(text)
-        @desc = text
-      end
-
       def operation(name, &block)
         name, action = *operation_name_and_action(name)
         @actions ||= {}
         @operations ||= {}
         @operations[name] = Operation.new(self, name, action, &block)
-        @operations[name].documentation = @desc unless @operations[name].documentation
         @actions[action] = @operations[name]
-        @desc = nil
       end
 
       def operation_from_action(action)

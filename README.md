@@ -42,6 +42,7 @@ class Api::Post
   # The 'index' action in Rails.
   # Also maps to the 'list_posts' command as an RPC call
   operation :index do
+    desc 'Lists the posts for a user'
     # Define this if you need to map parameters in the URL
     url '/:username/posts'
 
