@@ -8,6 +8,7 @@ module Seahorse
                   timestamp: [TimestampType, nil],
                   integer: [IntegerType, nil],
                   boolean: [BooleanType, nil],
+                  float: [FloatType, nil],
                   list: [ListType, nil],
                   structure: [StructureType, nil]
       hash

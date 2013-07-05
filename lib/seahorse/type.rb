@@ -114,6 +114,11 @@ module Seahorse
     def from_input(data, filter = true) !!pull_value(data) end
   end
 
+  class FloatType < Type
+    def from_input(data, filter = true) Float(data) end
+    def to_output(data) (value = pull_value(data)) ? value.to_f : nil end
+  end
+
   class ListType < Type
     attr_accessor :collection
 
