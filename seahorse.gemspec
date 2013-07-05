@@ -16,4 +16,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
   s.add_dependency 'activesupport'
   s.add_dependency 'oj'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rake'
 end
