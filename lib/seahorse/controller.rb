@@ -9,7 +9,7 @@ module Seahorse
 
       rescue_from Exception, :with => :render_error
 
-      wrap_parameters false
+      wrap_parameters false if respond_to?(:wrap_parameters)
 
       before_filter do
         @params = params
