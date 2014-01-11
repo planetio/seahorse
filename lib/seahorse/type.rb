@@ -195,7 +195,17 @@ module Seahorse
       end
 
       members.inject({}) do |hsh, (name, member)|
-        value = member.to_output(data)
+        # Allow one-to-one custom structures to be nested
+        # Don't pull value if model is nil; this is the root level case
+        # And also protect against pulling value when model is same class as data
+        # Perhaps a cleaner(but more dangerous) logic is:
+        # StructureType.subclasses.include?(self.class) 
+        # - I just don't know how trustworthy subclasses is
+        if !self.model.nil? && self.model != data.class
+          value = member.to_output(pull_value(data))
+        else
+          value = member.to_output(data)
+        end
         hsh[name] = value if value
         hsh
       end
