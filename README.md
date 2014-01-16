@@ -125,6 +125,13 @@ according to the inputs you defined in your API model. You don't have to white
 list attributes in your model, and you don't need to define strong parameters
 either; Seahorse does this all for you.
 
+Custom api path
+```ruby
+# config/initializers/seahorse.rb
+Seahorse.configure do |config|
+  config.api_path = "app/api"
+end
+```
 # Contributing
 
 Feel free to open issues or submit pull requests with any ideas you can think
