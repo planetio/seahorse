@@ -12,5 +12,6 @@ require 'seahorse/operation'
 require 'seahorse/type'
 require 'seahorse/shape_builder'
 require 'seahorse/version'
+require 'seahorse/configuration'
 
 require 'seahorse/railtie' if defined?(Rails)

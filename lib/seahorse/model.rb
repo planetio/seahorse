@@ -9,7 +9,7 @@ module Seahorse
       # @param options [Hash] opts options for drawing routes
       # @option options [Boolean] :exclude_rpc_routes Do not add routes for RPC calls
       def add_all_routes(router, options = {})
-        Dir.glob("#{Rails.root}/app/models/api/*.rb").each {|f| load f }
+        Dir.glob("#{Rails.root}/#{Seahorse.configuration.api_path}/*.rb").each {|f| load f }
         @@apis.values.each {|api| api.add_routes(router, options) }
       end
     end
