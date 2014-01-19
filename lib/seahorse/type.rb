@@ -80,18 +80,24 @@ module Seahorse
           if value.respond_to?(name)
             value = value.send(name)
             found = true
-          elsif Hash === value
+          elsif value.kind_of?(Hash)
             if value.has_key?(name)
               value = value[name]
               found = true
+            else
+              missing_property!(name, names, value)
             end
           else
-            raise ArgumentError, "no property `#{name}' while looking for " +
-                                 "`#{names.join('.')}' on #{value.inspect}"
+            missing_property!(name, names, value)
           end
         end
       end
       found ? value : nil
+    end
+
+    def missing_property!(name, names, value)
+      raise ArgumentError, "no property `#{name}' while looking for " +
+                           "`#{names.join('.')}' on #{value.inspect}"
     end
   end
 
