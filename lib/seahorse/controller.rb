@@ -9,6 +9,8 @@ module Seahorse
 
       rescue_from Exception, :with => :render_error
 
+      self.responder = Seahorse::Responder
+
       wrap_parameters false if respond_to?(:wrap_parameters)
 
       before_filter do
@@ -36,6 +38,10 @@ module Seahorse
       end
     end
 
+    def output_model(model)
+      operation.output.to_output(model)      
+    end
+
     private
 
     def render_error(exception)
@@ -44,16 +50,6 @@ module Seahorse
 
     def params
       @params || super
-    end
-
-    def respond_with(model, opts = {})
-      opts[:location] = nil
-      if opts[:error]
-        opts[:status] = opts[:error]
-        super
-      else
-        super(operation.output.to_output(model), opts)
-      end
     end
 
     def operation
