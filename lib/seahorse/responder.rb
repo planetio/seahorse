@@ -5,7 +5,13 @@ module Seahorse
     end
 
     def default_render
-      render json: controller.output_model(resource)
+      if options[:error]
+        render json: resource.to_json, status: options[:error]
+      else
+        render json: controller.output_model(resource)
+      end
+    rescue Exception => e
+      controller.send(:render_error, e)
     end
     private
 
