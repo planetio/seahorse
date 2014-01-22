@@ -62,7 +62,16 @@ module Seahorse
       @api_model = ('Api::' + controller_name.singularize.camelcase).constantize
     end 
 
-    def service_error(error, code = 'ServiceError', status = 400)
+    def service_error(error, code = 'ServiceError', status = nil)
+      status  ||= error.status || case code
+      when "ValidationError"
+        400
+      when "ArgumentError"
+        400
+      else
+        500
+      end
+
       respond_with({ code: code, message: error.message }, error: status)
     end
 
