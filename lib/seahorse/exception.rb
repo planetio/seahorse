@@ -9,7 +9,12 @@
 # end
 module Seahorse
   class Exception < Exception
-    cattr_accessor :status_code
+    cattr_accessor :status_code, :name
+
+    def initialize(message)
+      @status = self.class.status
+      super
+    end
 
     # setter and getter in one!
     def self.status(*code)
@@ -17,9 +22,9 @@ module Seahorse
       self.status_code
     end
 
-    def initialize(message)
-      @status = self.class.status
-      super
+    def self.name(*_name_str)
+      self.name_str = _name_str.first if _name_str.first.present?
+      self.name_str
     end
 
     def status
