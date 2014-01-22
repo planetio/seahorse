@@ -9,7 +9,7 @@
 # end
 module Seahorse
   class Exception < Exception
-    cattr_accessor :status_code, :name
+    cattr_accessor :status_code, :name_str
 
     def initialize(message)
       @status = self.class.status
