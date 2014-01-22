@@ -7,7 +7,7 @@ module Seahorse
     included do
       respond_to :json, :xml if respond_to?(:respond_to)
 
-      rescue_from Exception, :with => :render_error
+      rescue_from ::Exception, :with => :render_error
 
       self.responder = Seahorse::Responder
 
