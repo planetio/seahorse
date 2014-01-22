@@ -24,11 +24,7 @@ module Seahorse
           validator = Seahorse::ParamValidator.new(input_rules)
           validator.validate!(params)
         rescue ArgumentError => error
-          if request.headers['HTTP_USER_AGENT'] =~ /sdk|cli/
-            service_error(error, 'ValidationError')
-          else
-            raise(error)
-          end
+          service_error(error, 'ValidationError')
         end
 
         @params = operation.input.from_input(@params)
@@ -63,7 +59,7 @@ module Seahorse
     end 
 
     def service_error(error, code = 'ServiceError', status = nil)
-      status  ||= error.status || case code
+      status  ||= (error.respond_to?(:status) && error.status) || case code
       when "ValidationError"
         400
       when "ArgumentError"
