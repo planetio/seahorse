@@ -11,9 +11,9 @@ module Seahorse
   class Exception < Exception
     cattr_accessor :status_code, :name_str
 
-    def initialize(message)
+    def initialize(e)
       @status = self.class.status
-      super
+      super e
     end
 
     # setter and getter in one!
