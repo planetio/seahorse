@@ -9,10 +9,11 @@ module Seahorse
   end
 
   class Configuration
-    attr_accessor :api_path
+    attr_accessor :api_path, :access_token_parameter
 
     def initialize
       @api_path = 'app/models/api'
+      @access_token_parameter = nil
     end
   end
 end

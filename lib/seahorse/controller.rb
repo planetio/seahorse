@@ -17,6 +17,7 @@ module Seahorse
         @params = params
         @params = operation.input.from_input(params, false)
         @params.update(operation.input.from_input(map_headers, false))
+        @params.delete(Seahorse.configuration.access_token_parameter) if Seahorse.configuration.access_token_parameter
 
         begin
           input_rules = operation.to_hash['input']
