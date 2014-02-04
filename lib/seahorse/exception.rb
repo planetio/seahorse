@@ -9,22 +9,26 @@
 # end
 module Seahorse
   class Exception < Exception
-    cattr_accessor :status_code, :name_str
+
+    class << self
+      attr_accessor :status_code, :name_str
+  
+      # setter and getter in one!
+      def status(*code)
+        self.status_code = code.first if code.first.present?
+        self.status_code
+      end
+
+      def name(*_name_str)
+        self.name_str = _name_str.first if _name_str.first.present?
+        self.name_str
+      end
+
+    end
 
     def initialize(e)
       @status = self.class.status
       super e
-    end
-
-    # setter and getter in one!
-    def self.status(*code)
-      self.status_code = code.first if code.first.present?
-      self.status_code
-    end
-
-    def self.name(*_name_str)
-      self.name_str = _name_str.first if _name_str.first.present?
-      self.name_str
     end
 
     def status
