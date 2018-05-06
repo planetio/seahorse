@@ -23,7 +23,7 @@ module Seahorse
           input_rules = operation.to_hash['input']
           %w(action controller format).each {|v| params.delete(v) }
           validator = Seahorse::ParamValidator.new(input_rules)
-          validator.validate!(params)
+          validator.validate!(params.to_h)
         rescue ArgumentError => error
           service_error(error, 'ValidationError')
         end
