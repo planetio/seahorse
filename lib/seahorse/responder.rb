@@ -4,7 +4,7 @@ module Seahorse
        {:errors => nice_errors(resource, {})}
     end
 
-    def default_render
+    def api_behavior
       if options[:error]
         render json: resource.to_json, status: options[:error]
       else
